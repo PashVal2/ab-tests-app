@@ -24,10 +24,10 @@ public record UserRecord (
 
     @NotNull(groups = { OnCreate.class })
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    String pass,
+    String password,
 
     @NotNull(groups = { OnCreate.class })
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    String passConfirm
+    String passwordConfirmation
 
 ) implements Serializable { }

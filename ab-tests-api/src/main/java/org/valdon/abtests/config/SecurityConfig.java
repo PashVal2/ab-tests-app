@@ -15,6 +15,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.valdon.abtests.props.CorsProperties;
 
+import java.time.Duration;
 import java.util.List;
 
 @Configuration
@@ -32,7 +33,7 @@ public class SecurityConfig {
         cors.setAllowCredentials(true);
         cors.setAllowedHeaders(List.of("*"));
         cors.setAllowedOrigins(corsProperties.getAllowedOrigins());
-        cors.setMaxAge(3600L);
+        cors.setMaxAge(Duration.ofMinutes(60));
 
         var config = new UrlBasedCorsConfigurationSource();
         config.registerCorsConfiguration("/**", cors);

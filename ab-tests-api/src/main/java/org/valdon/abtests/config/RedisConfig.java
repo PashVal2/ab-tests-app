@@ -49,7 +49,6 @@ public class RedisConfig {
     public RedisTemplate<String, String> redisTemplate(
             @Qualifier("redisConnectionFactory0") RedisConnectionFactory cf
     ) {
-        log.warn("bbbbbbbbbbbbbbbb");
         final RedisTemplate<String, String> rt = new RedisTemplate<>();
         rt.setKeySerializer(new StringRedisSerializer());
         rt.setValueSerializer(new StringRedisSerializer());

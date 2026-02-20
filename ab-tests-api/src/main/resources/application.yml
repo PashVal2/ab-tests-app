@@ -2,35 +2,34 @@ server:
   port: 8081
 
 spring:
+  config:
+    import: optional:file:.env[.properties]
   application:
     name: ab-tests-api
-
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
-      ddl-auto: 'create-drop'
-
+      ddl-auto: validate
   data:
     redis:
       host: ${REDIS_HOST}
       port: ${REDIS_PORT}
       database: ${REDIS_DB}
       password: ${REDIS_PASSWORD}
-
   cache:
     type: REDIS
     cache-names: redis-cache
     redis:
       time-to-live: 600000
       cache-null-values: false
-
-  config:
-    import: optional:file:.env[.properties]
+  Liquibase:
+    change-log: 'classpath:liquibase/db.changelog-master.xml'
+    enabled: true
+    default-schema: public
 
 cors:
   allowed-origins:
