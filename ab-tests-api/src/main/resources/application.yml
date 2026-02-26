@@ -24,13 +24,22 @@ spring:
     type: REDIS
     cache-names: redis-cache
     redis:
-      time-to-live: 600000
+      time-to-live: 900000
       cache-null-values: false
   Liquibase:
     change-log: 'classpath:liquibase/db.changelog-master.xml'
     enabled: true
     default-schema: public
+  threads:
+    virtual:
+      enabled: true
 
 cors:
   allowed-origins:
     - "http://localhost:5173"
+
+security:
+    jwt:
+      secret: ${JWT_SECRET}
+      access-time-to-live: 15
+      refresh-time-to-live: 1440

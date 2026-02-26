@@ -2,19 +2,19 @@ package org.valdon.abtests.domain.user;
 
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.proxy.HibernateProxy;
+import org.valdon.abtests.domain.role.Role;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Getter
-@NoArgsConstructor
-public class UserEntity implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,21 +22,20 @@ public class UserEntity implements Serializable {
     private Long id;
 
     @Column(nullable = false, length = 50)
-    private String username;
+    private String name;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
 
     @Column(nullable = false)
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id")
+            joinColumns = @JoinColumn(name = "user_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false)
     )
-    @Enumerated(value = EnumType.STRING)
-    @Column(nullable = false, name = "role")
     private Set<Role> roles = new HashSet<>();
 
     @Override
@@ -55,8 +54,8 @@ public class UserEntity implements Serializable {
                 : getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
 
-        UserEntity that = (UserEntity) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
+        User that = (User) o;
+        return getId() != null && getId().equals(that.getId());
     }
 
     @Override

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-users" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="users"/></not>
+        </preConditions>
+        <createTable tableName="users">
+            <column name="user_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-roles" author="">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="roles"/></not>
+        </preConditions>
+        <createTable tableName="roles">
+            <column name="role_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-users-roles" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="users_roles"/></not>
+        </preConditions>
+        <createTable tableName="users_roles">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey
+                tableName="users_roles"
+                columnNames="user_id, role_id"
+                constraintName="pk_users_roles"/>
+        <addForeignKeyConstraint
+                baseTableName="users_roles"
+                baseColumnNames="user_id"
+                referencedTableName="users"
+                referencedColumnNames="user_id"
+                constraintName="fk_users_users_roles"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+        <addForeignKeyConstraint
+                baseTableName="users_roles"
+                baseColumnNames="role_id"
+                referencedTableName="roles"
+                referencedColumnNames="role_id"
+                constraintName="fk_roles_users_roles"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+        <createIndex tableName="users_roles" indexName="idx_users_roles_user_id">
+            <column name="user_id"/>
+        </createIndex>
+        <createIndex tableName="users_roles" indexName="idx_users_roles_role_id">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
