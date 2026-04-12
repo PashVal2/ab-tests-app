@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.valdon.abtests.domain.role.enums.RoleEnum;
 
 @Entity
 @Table(name = "roles")
@@ -18,7 +19,8 @@ public class Role {
     @Column(name = "role_id")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false, length = 50)
-    private String name;
+    private RoleEnum name;
 
 }

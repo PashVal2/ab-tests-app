@@ -1,0 +1,42 @@
+@use '../../../styles/index.scss' as *;
+
+.state {
+    padding: 18px;
+    color: #666;
+}
+
+.emptyState {
+    display: grid;
+    gap: 12px;
+    max-width: 620px;
+    padding: 20px;
+    margin: 24px auto;
+    border: 1px solid #e7e7e7;
+    border-radius: 12px;
+    background: #fff;
+
+    h3 {
+        margin: 0;
+        font-size: 22px;
+    }
+
+    p {
+        margin: 0;
+        color: #666;
+        line-height: 1.5;
+    }
+}
+
+.action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    padding: 0.625rem 0.9rem;
+    border-radius: 8px;
+    background: $dark-blue;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}

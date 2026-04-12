@@ -1,0 +1,106 @@
+@use '../../../styles/index.scss' as *;
+
+.formWrapper {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding: 1.5rem;
+
+    .formContainer {
+        display: grid;
+        padding: 2rem;
+        width: 100%;
+        min-width: 22rem;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        h2 {
+        text-align: center;
+        margin: 0.5rem;
+        }
+
+        form {
+            display: grid;
+            row-gap: 0.5rem;
+
+            label {
+                font-weight: 600;
+                margin-bottom: 0.25rem;
+                display: block;
+            }
+
+            input {
+                width: 100%;
+                padding: 0.5rem 0.75rem;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                font-size: 1rem;
+                transition: border 0.2s ease-in-out;
+
+                &:focus {
+                    border-color: $dark-blue;
+                    outline: none;
+                }
+            }
+
+            .error {
+                color: #d9534f;
+                font-size: 0.875rem;
+                min-height: 1.25rem;
+            }
+
+            button {
+                padding: 0.75rem 1rem;
+                border: none;
+                border-radius: 8px;
+                background-color: $dark-blue;
+                color: #fff;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+            }
+        }
+
+        .redirect {
+            text-align: center;
+            margin-top: 0.5rem;
+
+            a {
+                color: $dark-blue;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.emailStatus {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 70vh;
+    padding: 2.5rem;
+
+    div {
+        background-color: #fff;
+        padding: 2rem;
+        max-width: 400px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .error {
+        color: #d9534f;
+        font-weight: 600;
+    }
+
+    .success {
+        color: #28a745;
+        font-weight: 600;
+    }
+}

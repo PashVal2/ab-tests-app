@@ -1,0 +1,15 @@
+@use '../../styles/index.scss' as *;
+
+.layout {
+    display: grid;
+    grid-template-columns: $sidebar-width 1fr;
+    grid-template-areas:
+    "s c";
+    position: relative;
+}
+
+.content {
+    grid-area: c;
+    padding: 16px;
+    overflow-y: auto;
+}

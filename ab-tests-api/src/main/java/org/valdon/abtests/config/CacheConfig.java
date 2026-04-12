@@ -52,7 +52,8 @@ public class CacheConfig {
     ) {
         RedisCacheConfiguration cfg = RedisCacheConfiguration
                 .defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(60));
+                .entryTtl(Duration.ofMinutes(10));
+
         return RedisCacheManager.builder(cf)
                 .cacheDefaults(cfg)
                 .build();

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-user-assignments" author="valdon">
+        <createTable tableName="user_assignments">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="experiment_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="variant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="external_user_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="user_assignments"
+                baseColumnNames="experiment_id"
+                referencedTableName="experiments"
+                referencedColumnNames="experiment_id"
+                constraintName="fk_user_assignment_experiment"/>
+
+        <addForeignKeyConstraint
+                baseTableName="user_assignments"
+                baseColumnNames="variant_id"
+                referencedTableName="variants"
+                referencedColumnNames="variant_id"
+                constraintName="fk_user_assignment_variant"/>
+
+        <addUniqueConstraint
+                tableName="user_assignments"
+                columnNames="experiment_id, external_user_id"
+                constraintName="uk_assignment_experiment_external_user"/>
+    </changeSet>
+
+    <changeSet id="create-user-events" author="valdon">
+        <createTable tableName="user_events">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="experiment_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="variant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="external_user_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content_id" type="varchar(255)"/>
+            <column name="event_type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_value" type="double"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="user_events"
+                baseColumnNames="experiment_id"
+                referencedTableName="experiments"
+                referencedColumnNames="experiment_id"
+                constraintName="fk_user_event_experiment"/>
+
+        <addForeignKeyConstraint
+                baseTableName="user_events"
+                baseColumnNames="variant_id"
+                referencedTableName="variants"
+                referencedColumnNames="variant_id"
+                constraintName="fk_user_event_variant"/>
+    </changeSet>
+
+    <changeSet id="create-metric-results" author="valdon">
+        <createTable tableName="metric_results">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="experiment_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="variant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="metric_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="metric_value" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sample_size" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="p_value" type="double"/>
+            <column name="confidence_level" type="double"/>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="metric_results"
+                baseColumnNames="experiment_id"
+                referencedTableName="experiments"
+                referencedColumnNames="experiment_id"
+                constraintName="fk_metric_result_experiment"/>
+
+        <addForeignKeyConstraint
+                baseTableName="metric_results"
+                baseColumnNames="variant_id"
+                referencedTableName="variants"
+                referencedColumnNames="variant_id"
+                constraintName="fk_metric_result_variant"/>
+    </changeSet>
+
+</databaseChangeLog>

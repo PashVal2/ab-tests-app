@@ -1,0 +1,105 @@
+@use '../../../styles/index.scss' as *;
+
+.page {
+    min-height: 80vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+}
+
+.card {
+    width: 100%;
+    max-width: 34rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    box-shadow:
+        0 20px 45px rgba(15, 23, 42, 0.08),
+        0 6px 18px rgba(15, 23, 42, 0.04);
+    padding: 2rem;
+    display: grid;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.description {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.emailBox {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.emailLabel {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.emailValue {
+    font-size: 1em;
+    word-break: break-word;
+}
+
+.resendBlock {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.resendText {
+    font-size: 0.95rem;
+    color: #64748b;
+}
+
+.resendLink {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: $dark-blue;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: opacity 0.18s ease, color 0.18s ease;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.65;
+        text-decoration: none;
+    }
+}
+
+.message {
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.success {
+    background: #ecfdf3;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.error {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}

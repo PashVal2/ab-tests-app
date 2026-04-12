@@ -10,8 +10,14 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.serializer.GenericJacksonJsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.valdon.abtests.props.RedisProperties;
+import org.valdon.abtests.config.props.RedisProperties;
+import org.valdon.abtests.pubsub.RedisMessageSubscriber;
+import tools.jackson.databind.ObjectMapper;
 
 @Slf4j
 @AllArgsConstructor
@@ -54,6 +60,36 @@ public class RedisConfig {
         rt.setValueSerializer(new StringRedisSerializer());
         rt.setConnectionFactory(cf);
         return rt;
+    }
+
+    @Bean
+    public RedisTemplate<String, Object> redisTemplatePubSub(
+            @Qualifier("redisConnectionFactory2") RedisConnectionFactory connectionFactory
+    ) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(connectionFactory);
+        template.setKeySerializer(new StringRedisSerializer());
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        template.setValueSerializer(new GenericJacksonJsonRedisSerializer(objectMapper));
+        return template;
+    }
+
+    @Bean
+    ChannelTopic topic() {
+        return new ChannelTopic("user-created-topic");
+    }
+
+    @Bean
+    RedisMessageListenerContainer redisContainer(
+            @Qualifier("redisConnectionFactory2") RedisConnectionFactory connectionFactory,
+            RedisMessageSubscriber subscriber
+    ) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+
+        container.addMessageListener(subscriber, topic());
+        return container;
     }
 
 }

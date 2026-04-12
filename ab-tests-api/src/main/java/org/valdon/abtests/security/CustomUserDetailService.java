@@ -10,9 +10,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.valdon.abtests.domain.role.Role;
+import org.valdon.abtests.domain.role.enums.RoleEnum;
 import org.valdon.abtests.domain.user.User;
 import org.valdon.abtests.ex.ResourceNotFoundException;
-import org.valdon.abtests.repository.UserRepository;
+import org.valdon.abtests.repository.user.UserRepository;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,12 +38,14 @@ public class CustomUserDetailService implements UserDetailsService {
                 user.getName(),
                 user.getUsername(),
                 user.getPassword(),
+                user.isEnabled(),
                 mapToGrantedAuthority(user.getRoles()));
     }
 
     private Set<GrantedAuthority> mapToGrantedAuthority(Set<Role> roles) {
         return roles.stream()
                 .map(Role::getName)
+                .map(RoleEnum::name)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
     }

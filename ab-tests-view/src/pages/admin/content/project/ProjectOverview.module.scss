@@ -1,0 +1,170 @@
+@use '../../../../styles/index.scss' as *;
+
+.wrapper {
+    display: grid;
+    gap: 16px;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    border: 1px solid #dbe6f5;
+    background: linear-gradient(135deg, #f8f9fa 0%, #eef4ff 100%);
+}
+
+.projectBadge {
+    display: grid;
+    gap: 4px;
+    min-width: 160px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #dbe6f5;
+    background: white;
+}
+
+.projectCodeLabel {
+    color: #666;
+}
+
+.projectCode {
+    font-weight: 700;
+    color: $dark-blue;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+}
+
+.sectionHint {
+    font-size: 13px;
+    color: #777;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.statCard {
+    display: grid;
+    align-content: space-between;
+    gap: 12px;
+    min-height: 190px;
+    padding: 16px;
+    border: 1px solid #e7e7e7;
+    border-radius: 12px;
+    background: #f8f9fa;
+}
+
+.statTop {
+    display: grid;
+    gap: 4px;
+}
+
+.statValue {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: 15px;
+    font-weight: 600;
+    color: #444;
+}
+
+.statDescription {
+    font-size: 14px;
+    line-height: 1.45;
+    color: #666;
+}
+
+.cardAction {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 0.75rem;
+    border-radius: 8px;
+    background-color: $dark-blue;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.createPanel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+    border: 1px solid #e7e7e7;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.createTitle {
+    margin-bottom: 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.createText {
+    font-size: 14px;
+    color: #666;
+}
+
+.createActions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.secondaryBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid #cfe0ff;
+    border-radius: 8px;
+    background: #eef4ff;
+    color: $dark-blue;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+@media (max-width: 980px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}

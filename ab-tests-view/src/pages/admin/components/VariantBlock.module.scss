@@ -1,0 +1,92 @@
+.variantBlock {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    h3 {
+        margin: 0 0 6px 0;
+    }
+}
+
+.rowsGroup {
+    display: grid;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-bottom: none;
+
+    &:first-child {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    &.selected {
+        background-color: #fff;
+    }
+
+    &.unselected {
+        background-color: #f8f8f8;
+    }
+}
+
+.topRow {
+    background-color: #fcfcfc;
+}
+
+.rowLabel {
+    flex: 1;
+    font-weight: 500;
+    color: #333;
+}
+
+.featureName {
+    flex: 1;
+}
+
+.textInput,
+.numberInput {
+    padding: 0.375rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin: 0;
+}
+
+.textInput {
+    width: 60%;
+}
+
+.numberInput {
+    width: 80px;
+    text-align: center;
+}
+
+.percentInputWrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 80px;
+    gap: 6px;
+
+    .numberInput {
+        width: 80%;
+    }
+}
+
+.inputSuffix {
+    min-width: 18px;
+    color: #666;
+    font-weight: 500;
+}

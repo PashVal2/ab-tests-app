@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="project-table-drop-owner-unique" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*)
+                FROM information_schema.table_constraints
+                WHERE table_name = 'projects'
+                AND constraint_type = 'UNIQUE'
+                AND constraint_name = 'projects_owner_user_id_key'
+            </sqlCheck>
+        </preConditions>
+        <dropUniqueConstraint
+                tableName="projects"
+                constraintName="projects_owner_user_id_key"
+        />
+    </changeSet>
+    
+    <changeSet id="add-project-owner-index" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists
+                        tableName="projects"
+                        indexName="idx_projects_owner_user_id"
+                />
+            </not>
+        </preConditions>
+        <createIndex tableName="projects" indexName="idx_projects_owner_user_id">
+            <column name="owner_user_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

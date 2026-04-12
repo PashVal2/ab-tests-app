@@ -1,0 +1,87 @@
+@use '../../../../styles/index.scss' as *;
+
+.wrapper {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 1px solid #dbe6f5;
+  background: linear-gradient(135deg, #f8f9fa 0%, #eef4ff 100%);
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: #666;
+}
+
+.projectBadge {
+  display: grid;
+  gap: 4px;
+  min-width: 160px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #dbe6f5;
+  background: #fff;
+}
+
+.projectCodeLabel {
+  color: #666;
+}
+
+.projectCode {
+  font-weight: 700;
+  color: $dark-blue;
+}
+
+.card {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #e7e7e7;
+  background: #fff;
+
+  h3 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  pre {
+    margin: 0;
+    padding: 12px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+}
+
+.eventList,
+.orderList {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}

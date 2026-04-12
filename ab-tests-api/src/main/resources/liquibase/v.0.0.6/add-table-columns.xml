@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="metric-results-rename-sample-size-to-assigned-users-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="metric_results"/>
+                <columnExists tableName="metric_results" columnName="sample_size"/>
+                <not>
+                    <columnExists tableName="metric_results" columnName="assigned_users"/>
+                </not>
+            </and>
+        </preConditions>
+
+        <renameColumn
+                tableName="metric_results"
+                oldColumnName="sample_size"
+                newColumnName="assigned_users"
+                columnDataType="bigint"/>
+    </changeSet>
+
+    <changeSet id="metric-results-add-assigned-users-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="metric_results"/>
+                <not>
+                    <columnExists tableName="metric_results" columnName="assigned_users"/>
+                </not>
+            </and>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="assigned_users" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-denominator-users-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="denominator_users"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="denominator_users" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-numerator-users-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="numerator_users"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="numerator_users" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-impressions-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="impressions"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="impressions" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-clicks-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="clicks"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="clicks" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-views-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="views"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="views" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-watch-starts-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="watch_starts"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="watch_starts" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-watch-finishes-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="watch_finishes"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="watch_finishes" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-likes-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="likes"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="likes" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-uplift-percent-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="uplift_percent"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="uplift_percent" type="double precision"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-diff-from-control-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="diff_from_control"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="diff_from_control" type="double precision"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-ci-95-lower-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="ci_95_lower"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="ci_95_lower" type="double precision"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-ci-95-upper-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="ci_95_upper"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="ci_95_upper" type="double precision"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-add-statistically-significant-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="metric_results" columnName="statistically_significant"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="metric_results">
+            <column name="statistically_significant" type="boolean" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="metric-results-drop-confidence-level-v006" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="metric_results" columnName="confidence_level"/>
+        </preConditions>
+
+        <dropColumn tableName="metric_results" columnName="confidence_level"/>
+    </changeSet>
+
+</databaseChangeLog>

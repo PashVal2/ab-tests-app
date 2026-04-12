@@ -4,6 +4,7 @@ HELP.md
 
 ### Env ###
 .env
+!.env.example
 
 ### STS ###
 .apt_generated

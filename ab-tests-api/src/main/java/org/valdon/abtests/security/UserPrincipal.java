@@ -17,6 +17,12 @@ public class UserPrincipal implements UserDetails {
     private String name;
     private String username;
     private String password;
+    private boolean enabled;
     private final Collection<? extends GrantedAuthority> authorities;
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
 
 }

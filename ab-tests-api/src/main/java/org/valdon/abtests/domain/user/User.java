@@ -1,6 +1,9 @@
 package org.valdon.abtests.domain.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 import org.valdon.abtests.domain.role.Role;
@@ -29,6 +32,9 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private boolean enabled;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

@@ -1,0 +1,249 @@
+@use '../../styles/index.scss' as *;
+
+.home {
+    display: grid;
+    gap: 24px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.hero {
+    position: relative;
+    display: grid;
+    gap: 24px;
+    align-items: center;
+    min-height: 420px;
+    padding: 32px;
+    border-radius: 24px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at top left, rgba(76, 135, 255, 0.18), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(0, 102, 204, 0.16), transparent 40%),
+        linear-gradient(135deg, #f8fbff 0%, #eef4ff 45%, #f9fbff 100%);
+    border: 1px solid #d9e6ff;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 16px;
+}
+
+
+.title {
+    margin: 0;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.05;
+    font-weight: 800;
+    color: #14233b;
+}
+
+.subtitle {
+    max-width: 640px;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #5d6b82;
+}
+
+.heroActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.primaryBtn,
+.secondaryBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.primaryBtn {
+    background: $dark-blue;
+    color: white;
+    box-shadow: 0 10px 24px rgba(0, 102, 204, 0.22);
+
+    &:hover {
+        background: $hover-dark-blue;
+        transform: translateY(-1px);
+    }
+}
+
+.secondaryBtn {
+    background: white;
+    color: $dark-blue;
+    border: 1px solid #cfe0ff;
+
+    &:hover {
+        background: #f4f8ff;
+        transform: translateY(-1px);
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.infoCard {
+    display: grid;
+    gap: 12px;
+    min-height: 220px;
+    padding: 18px;
+    border-radius: 18px;
+    border: 1px solid #e7edf7;
+    box-shadow: 0 10px 24px rgba(31, 67, 124, 0.06);
+    transition: 0.2s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 32px rgba(31, 67, 124, 0.12);
+        border-color: #cfe0ff;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 20px;
+        color: #14233b;
+    }
+
+    p {
+        margin: 0;
+        color: #66758d;
+        line-height: 1.5;
+        font-size: 14px;
+    }
+}
+
+.infoTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.infoTag {
+    padding: 0.3rem 0.55rem;
+    border-radius: 999px;
+    background: #eef4ff;
+    color: $dark-blue;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.workflow {
+    display: grid;
+    gap: 18px;
+    padding: 24px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid #e7edf7;
+}
+
+.workflowHeader {
+    display: grid;
+    gap: 8px;
+
+    h2 {
+        margin: 0;
+        font-size: 28px;
+        color: #14233b;
+    }
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.step {
+    display: flex;
+    gap: 14px;
+    padding: 18px;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid #e7edf7;
+
+    h3 {
+        margin: 0 0 6px 0;
+        font-size: 18px;
+        color: #14233b;
+    }
+
+    p {
+        margin: 0;
+        color: #66758d;
+        line-height: 1.5;
+        font-size: 14px;
+    }
+
+}
+
+.stepNumber {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef4ff;
+    color: $dark-blue;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+@media (max-width: 1100px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .heroVisual {
+        min-height: 280px;
+    }
+}
+
+@media (max-width: 720px) {
+    .home {
+        gap: 18px;
+    }
+
+    .hero {
+        padding: 22px;
+        min-height: auto;
+    }
+
+    .grid,
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .mainCard {
+        width: 230px;
+    }
+
+    .smallCard {
+        width: 150px;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+}

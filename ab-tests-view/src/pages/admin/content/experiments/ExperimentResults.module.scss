@@ -1,0 +1,214 @@
+@use '../../../../styles/index.scss' as *;
+
+.wrapper {
+    display: grid;
+    gap: 16px;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin-top: 6px;
+    color: #666;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 0.85rem;
+    border-radius: 8px;
+    background: #eef4ff;
+    color: $dark-blue;
+    border: 1px solid #cfe0ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.summaryCard {
+    display: grid;
+    gap: 6px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #f8f9fa;
+    border: 1px solid #e7e7e7;
+
+    span {
+        color: #666;
+        font-size: 14px;
+    }
+
+    b {
+        font-size: 20px;
+    }
+}
+
+.chartCard {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+}
+
+.chartHeader {
+    display: grid;
+    gap: 6px;
+
+    h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    p {
+        margin: 0;
+        color: #666;
+        line-height: 1.45;
+    }
+}
+
+.chartWrap {
+    width: 100%;
+    height: 320px;
+    padding-top: 8px;
+}
+
+.cards {
+    display: grid;
+    gap: 14px;
+}
+
+.card {
+    display: grid;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.variantTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.variantMeta {
+    margin-top: 4px;
+    color: #666;
+}
+
+.badge,
+.winner {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge {
+    background: #eef1f8;
+    color: #42526e;
+}
+
+.winner {
+    background: #e7f7eb;
+    color: #1c7c36;
+}
+
+.metricBox {
+    display: grid;
+    gap: 4px;
+    text-align: right;
+    min-width: 140px;
+
+    span {
+        color: #666;
+        font-size: 13px;
+    }
+
+    b {
+        font-size: 24px;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+
+    div {
+        display: grid;
+        gap: 4px;
+        padding: 10px 12px;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+
+    span {
+        font-size: 13px;
+        color: #666;
+    }
+}
+
+.events {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+
+    div {
+        padding: 10px 12px;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 900px) {
+    .summary,
+    .grid,
+    .events {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .summary,
+    .grid,
+    .events {
+        grid-template-columns: 1fr;
+    }
+}

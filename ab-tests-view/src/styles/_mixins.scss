@@ -1,0 +1,11 @@
+@mixin grid-space-between (
+    $columns: 3,
+    $size: auto,
+    $gap-value: 1.25rem
+) {
+    display: grid;
+    grid-template-columns: repeat($columns, $size);
+    justify-content: space-between;
+    row-gap: $gap-value;
+    column-gap: 1rem
+}

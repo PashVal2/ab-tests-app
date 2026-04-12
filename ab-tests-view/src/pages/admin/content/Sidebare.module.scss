@@ -1,0 +1,62 @@
+@use '../../../styles/index.scss' as *;
+
+.sidebar {
+    background: #fff;
+    border-right: 1px solid #f1f1f1;
+    padding: 16px;
+    width: $sidebar-width;
+    height: 100%;
+    display: grid;
+    grid-auto-rows: min-content;
+    gap: $gap;
+    position: fixed;
+
+    .title {
+        font-size: 18px;
+        padding: 10px 12px;
+        background: $dark-blue;
+        color: white;
+        border-radius: 8px;
+    }
+
+    .item {
+        border-radius: 8px;
+        transition: background 0.4s;
+        padding: 10px 12px;
+
+        a {
+            display: block;
+        }
+
+        &:hover {
+            background: $light-blue;
+        }
+    }
+}
+
+.currentProject {
+    display: grid;
+    gap: 4px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #e4ecfb;
+    background: #f8fbff;
+}
+
+.currentProjectLabel {
+    font-size: 12px;
+    color: #667085;
+}
+
+.currentProjectName {
+    font-size: 14px;
+    font-weight: 600;
+    color: $dark-blue;
+    word-break: break-word;
+}
+
+.currentProjectCode {
+    font-size: 12px;
+    color: #666;
+    word-break: break-word;
+}

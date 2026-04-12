@@ -1,11 +1,13 @@
 package org.valdon.abtests.controller.users;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.valdon.abtests.dto.user.UserResponse;
+import org.valdon.abtests.dto.user.UserWithRolesResponse;
 import org.valdon.abtests.security.UserPrincipal;
 import org.valdon.abtests.service.user.UserService;
 
@@ -13,6 +15,7 @@ import org.valdon.abtests.service.user.UserService;
 @Validated
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
     private final UserService userService;
@@ -28,12 +31,11 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-
     @GetMapping("/me")
-    public UserResponse getCurrentUser(
+    public UserWithRolesResponse getCurrentUser(
             @AuthenticationPrincipal UserPrincipal userPrincipal
     ) {
-        return userService.getUserById(userPrincipal.getId());
+        return userService.getUserWithRoles(userPrincipal.getId());
     }
 
 }

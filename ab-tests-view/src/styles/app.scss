@@ -1,0 +1,23 @@
+@use './index.scss' as *;
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #fff;
+}
+
+.appWrapper {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+    "h"
+    "b"
+    "f";
+    min-height: 100vh;
+}
+
+.appWrapperContent {
+    grid-area: b;
+}

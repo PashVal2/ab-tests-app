@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <!-- PROJECT SERVICE -->
+    <changeSet id="create-projects" author="valdon">
+        <createTable tableName="projects">
+            <column name="project_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="owner_user_id" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="projects"
+                baseColumnNames="owner_user_id"
+                referencedTableName="users"
+                referencedColumnNames="user_id"
+                constraintName="fk_project_owner"/>
+    </changeSet>
+
+    <!-- FEATURES -->
+    <changeSet id="create-features" author="valdon">
+        <createTable tableName="features">
+            <column name="feature_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="features"
+                baseColumnNames="project_id"
+                referencedTableName="projects"
+                referencedColumnNames="project_id"
+                constraintName="fk_feature_project"/>
+
+        <addForeignKeyConstraint
+                baseTableName="features"
+                baseColumnNames="created_by_user_id"
+                referencedTableName="users"
+                referencedColumnNames="user_id"
+                constraintName="fk_feature_created_by"/>
+    </changeSet>
+
+    <!-- EXPERIMENTS -->
+    <changeSet id="create-experiments" author="valdon">
+        <createTable tableName="experiments">
+            <column name="experiment_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="external_key" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="started_at" type="timestamp"/>
+            <column name="ended_at" type="timestamp"/>
+            <column name="null_hypothesis" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="alternative_hypothesis" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="primary_metric" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="experiments"
+                baseColumnNames="project_id"
+                referencedTableName="projects"
+                referencedColumnNames="project_id"
+                constraintName="fk_experiment_project"/>
+
+        <addForeignKeyConstraint
+                baseTableName="experiments"
+                baseColumnNames="created_by_user_id"
+                referencedTableName="users"
+                referencedColumnNames="user_id"
+                constraintName="fk_experiment_created_by"/>
+    </changeSet>
+
+    <!-- VARIANTS -->
+    <changeSet id="create-variants" author="valdon">
+        <createTable tableName="variants">
+            <column name="variant_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="experiment_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_control" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="traffic_percent" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="external_code" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="variants"
+                baseColumnNames="experiment_id"
+                referencedTableName="experiments"
+                referencedColumnNames="experiment_id"
+                constraintName="fk_variant_experiment"/>
+    </changeSet>
+
+    <!-- VARIANT FEATURE WEIGHTS -->
+    <changeSet id="create-variant-feature-weights" author="valdon">
+        <createTable tableName="variant_feature_weights">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="variant_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="feature_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="double">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="variant_feature_weights"
+                baseColumnNames="variant_id"
+                referencedTableName="variants"
+                referencedColumnNames="variant_id"
+                constraintName="fk_weight_variant"/>
+
+        <addForeignKeyConstraint
+                baseTableName="variant_feature_weights"
+                baseColumnNames="feature_id"
+                referencedTableName="features"
+                referencedColumnNames="feature_id"
+                constraintName="fk_weight_feature"/>
+    </changeSet>
+
+    <!-- API KEYS -->
+    <changeSet id="create-api-keys" author="valdon">
+        <createTable tableName="api_keys">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="key_prefix" type="varchar(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="key_hash" type="varchar(64)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="project_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="api_keys"
+                baseColumnNames="project_id"
+                referencedTableName="projects"
+                referencedColumnNames="project_id"
+                constraintName="fk_api_key_project"/>
+
+        <addForeignKeyConstraint
+                baseTableName="api_keys"
+                baseColumnNames="created_by_user_id"
+                referencedTableName="users"
+                referencedColumnNames="user_id"
+                constraintName="fk_api_key_created_by"/>
+    </changeSet>
+
+</databaseChangeLog>

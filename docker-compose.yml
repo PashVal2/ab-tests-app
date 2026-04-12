@@ -5,6 +5,8 @@ volumes:
     driver: local
   redis-data:
     driver: local
+  minio-data:
+    driver: local
 
 networks:
   app-network:
@@ -39,3 +41,18 @@ services:
       - redis-data:/data
     ports:
       - '6379:6379'
+
+#  minio:
+#    image: minio/minio:latest-cicd
+#    container_name: minio
+#    environment:
+#      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
+#      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+#    command: server ~/minio --console-address :9090
+#    ports:
+#      - '9090:9090'
+#      - '9000:9000'
+#    volumes:
+#      - minio-data:/minio
+#    networks:
+#      - app-network

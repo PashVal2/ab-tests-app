@@ -1,0 +1,17 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h2>Здравствуйте, <span th:text="${name}">Пользователь</span></h2>
+<p>Спасибо за регистрацию на нашем сервисе</p>
+<p>
+    Пожалуйста, подтвердите почту, перейдя по ссылке ниже:
+</p>
+<p>
+    <a th:href="@{http://localhost:5173/auth/confirm-email(token=${token})}">Подтвердите e-mail</a>
+</p>
+</body>
+</html>

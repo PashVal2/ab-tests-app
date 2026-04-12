@@ -7,7 +7,9 @@
 
     <changeSet id="create-users" author="valdon">
         <preConditions onFail="MARK_RAN">
-            <not><tableExists tableName="users"/></not>
+            <not>
+                <tableExists tableName="users"/>
+            </not>
         </preConditions>
         <createTable tableName="users">
             <column name="user_id" type="bigint" autoIncrement="true">
@@ -16,13 +18,43 @@
             <column name="name" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="username" type="varchar(255)">
+            <column name="username" type="varchar(100)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="password" type="varchar(255)">
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="boolean" defaultValueBoolean="false">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="create-email-confirmations" author="valdon">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="email_confirmations"/></not>
+        </preConditions>
+
+        <createTable tableName="email_confirmations">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="token" type="varchar(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expires_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="email_confirmations" baseColumnNames="user_id"
+                referencedTableName="users" referencedColumnNames="user_id"
+                onDelete="CASCADE"
+                constraintName="fk_email_confirmation_user"/>
     </changeSet>
 
     <changeSet id="create-roles" author="">
